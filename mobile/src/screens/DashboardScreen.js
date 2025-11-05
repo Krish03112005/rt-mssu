@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
+  Image,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -12,27 +13,41 @@ import {LinearGradient} from 'expo-linear-gradient';
 const DashboardScreen = ({navigation}) => {
   return (
   <SafeAreaView style={styles.safeArea} edges={['top']}>
-    <StatusBar backgroundColor="#424588" barStyle="light-content" />
+    <StatusBar backgroundColor="#10435eff" barStyle="light-content" />
     <View style={styles.container}>
       <LinearGradient
-        colors={['#424588', '#060A25']}
+        colors={['#1A6B96', '#060A25', '#1A6B96']}
         start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}
         style={styles.navbar}>
+        
         <TouchableOpacity
-          style={styles.menuButton}
-          onPress={() => navigation.openDrawer()}>
-          <View style={styles.menuIcon}>
+            style={styles.menuButton}
+            onPress={() => navigation.openDrawer()}>
+            <View style={styles.menuIcon}>
             <View style={styles.menuLine} />
             <View style={styles.menuLine} />
             <View style={styles.menuLine} />
+            </View>
+        </TouchableOpacity>
+        <Image
+            source={require('../../assets/MSSU-Logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+        />
+        <TouchableOpacity style={styles.profileButton}>
+          <View style={styles.profileCircle}>
+            <Text style={styles.profileInitial}>U</Text>
           </View>
         </TouchableOpacity>
-        <Text style={styles.navTitle}>Dashboard</Text>
-      </LinearGradient>
+        </LinearGradient>
+
 
       <View style={styles.content}>
-        <Text style={styles.welcomeText}>Welcome to Dashboard</Text>
+        <View style={styles.carouselPlaceholder}>
+          <Text style={styles.placeholderText}>Image Carousel Section</Text>
+          <Text style={styles.placeholderSubtext}>(Images will be added here)</Text>
+        </View>
       </View>
     </View>
   </SafeAreaView>
@@ -42,7 +57,7 @@ const DashboardScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#424588',
+    backgroundColor: '#1A6B96',
   },
   container: {
     flex: 1,
@@ -63,6 +78,20 @@ const styles = StyleSheet.create({
   menuButton: {
     padding: 5,
   },
+ logoContainer: {
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginRight: 35,
+},
+
+  logo: {
+  flex: 1,
+  width: 120,
+  height: 29,
+  alignSelf: 'center',
+  marginLeft: 10,
+  },
   menuIcon: {
     width: 25,
     height: 20,
@@ -74,20 +103,47 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 2,
   },
-  navTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginLeft: 15,
-  },
   content: {
     flex: 1,
+    padding: 15,
+  },
+  carouselPlaceholder: {
+    width: '100%',
+    height: 200,
+    borderWidth: 3,
+    borderColor: 'red',
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f5f5f5',
   },
-  welcomeText: {
-    fontSize: 24,
-    color: '#000',
+  placeholderText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 5,
+  },
+  placeholderSubtext: {
+    fontSize: 14,
+    color: '#666',
+  },
+  profileButton: {
+    marginLeft: 10,
+  },
+  profileCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#1A6B96',
+  },
+  profileInitial: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#1A6B96',
   },
 });
 
