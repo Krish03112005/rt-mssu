@@ -44,9 +44,12 @@ const DashboardScreen = ({navigation}) => {
 
 
       <View style={styles.content}>
-        <View style={styles.carouselPlaceholder}>
-          <Text style={styles.placeholderText}>Image Carousel Section</Text>
-          <Text style={styles.placeholderSubtext}>(Images will be added here)</Text>
+        <View style={styles.carouselContainer}>
+          <Image
+            source={require('../../assets/image slide-show.png')}
+            style={styles.carouselImage}
+            resizeMode="cover"
+          />
         </View>
       </View>
     </View>
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
   logo: {
   flex: 1,
   width: 120,
-  height: 29,
+  height: 35,
   alignSelf: 'center',
   marginLeft: 10,
   },
@@ -107,25 +110,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
   },
-  carouselPlaceholder: {
+  carouselContainer: {
     width: '100%',
     height: 200,
-    borderWidth: 3,
-    borderColor: 'red',
     borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    overflow: 'hidden',
     backgroundColor: '#f5f5f5',
   },
-  placeholderText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 5,
-  },
-  placeholderSubtext: {
-    fontSize: 14,
-    color: '#666',
+  carouselImage: {
+    width: '100%',
+    height: '100%',
   },
   profileButton: {
     marginLeft: 10,
