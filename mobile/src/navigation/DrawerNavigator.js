@@ -1,13 +1,16 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import DashboardScreen from '../screens/DashboardScreen';
 import ProfileIcon from '../components/ui/icons/ProfileIcon';
 import TuitionIcon from '../components/ui/icons/TuitionIcon';
 import NoticeIcon from '../components/ui/icons/NoticeIcon';
 import SupportIcon from '../components/ui/icons/SupportIcon';
 import HolidayIcon from '../components/ui/icons/HolidayIcon';
+import LibraryIcon from '../components/ui/icons/LibraryIcon';
 import LogoutIcon from '../components/ui/icons/LogoutIcon';
+import MenuIcon from '../components/ui/icons/MenuIcon';
 
 const Drawer = createDrawerNavigator();
 
@@ -15,7 +18,7 @@ const CustomDrawerContent = ({navigation}) => {
   const handleLogout = () => {
     navigation.reset({
       index: 0,
-      routes: [{name: 'Login'}],
+      routes: [{name: 'ProfileSelection'}],
     });
   };
 
@@ -45,11 +48,17 @@ const CustomDrawerContent = ({navigation}) => {
       icon: HolidayIcon,
       onPress: () => console.log('Holiday'),
     },
+    {
+      title: 'Library',
+      icon: LibraryIcon,
+      onPress: () => console.log('Library'),
+    },
   ];
 
   return (
-    <View style={styles.drawerContainer}>
+    <SafeAreaView style={styles.drawerContainer} edges={['top', 'bottom']}>
       <View style={styles.menuHeader}>
+        <MenuIcon size={28} color="#000" />
         <Text style={styles.menuTitle}>Menu</Text>
       </View>
 
@@ -69,7 +78,7 @@ const CustomDrawerContent = ({navigation}) => {
         <LogoutIcon size={24} color="#EF4444" />
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -80,7 +89,9 @@ const DrawerNavigator = () => {
       screenOptions={{
         headerShown: false,
         drawerStyle: {
-          width: 280,
+          width: 250,
+          borderTopRightRadius: 4,
+          borderBottomRightRadius: 4,
         },
       }}>
       <Drawer.Screen name="DashboardMain" component={DashboardScreen} />
@@ -94,24 +105,33 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   menuHeader: {
-    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
   },
   menuTitle: {
-    fontSize: 24,
+    fontSize: 29,
     fontWeight: 'bold',
     color: '#000',
+    marginLeft: 12,
   },
   menuItems: {
     flex: 1,
-    paddingTop: 10,
+    paddingTop: 8,
   },
   menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    backgroundColor: '#F9FAFB',
+    borderRadius: 7,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
   },
   menuItemText: {
     fontSize: 16,
