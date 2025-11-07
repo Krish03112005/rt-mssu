@@ -1,8 +1,9 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import DashboardScreen from '../screens/DashboardScreen';
+import {useUser} from '../context/UserContext';
 import ProfileIcon from '../components/ui/icons/ProfileIcon';
 import TuitionIcon from '../components/ui/icons/TuitionIcon';
 import NoticeIcon from '../components/ui/icons/NoticeIcon';
@@ -15,11 +16,22 @@ import MenuIcon from '../components/ui/icons/MenuIcon';
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = ({navigation}) => {
-  const handleLogout = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'ProfileSelection'}],
-    });
+  const {logout} = useUser();
+
+  const handleLogout = async () => {
+    try {
+      // Call UserContext logout to clear authentication state and secure storage
+      await logout();
+      
+      // Navigate to ProfileSelection screen after successful logout
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'ProfileSelection'}],
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+      Alert.alert('Logout Error', 'Failed to logout. Please try again.');
+    }
   };
 
   const menuItems = [
